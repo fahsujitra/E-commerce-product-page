@@ -4,10 +4,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const basePath = '/e-commerce-product-page';
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  basePath: '/e-commerce-product-page',
+  env: {
+    basePath: basePath,
+  },
+  basePath: basePath,
   images: {
     unoptimized: true,
   },
