@@ -7,13 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export -o docs/ && echo> docs/.nojekyll"
+    "export": "next export -o docs/ && echo> docs/.nojekyll",
+    "analyze": "cross-env ANALYZE=true yarn build",
+    "serve": "serve .next/analyze"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@next/bundle-analyzer": "^12.3.1",
     "framer-motion": "^6",
     "next": "12.3.1",
     "react": "18.2.0",
@@ -24,8 +27,10 @@
     "@types/node": "18.11.0",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
+    "cross-env": "^7.0.3",
     "eslint": "8.25.0",
     "eslint-config-next": "12.3.1",
+    "serve": "^14.0.1",
     "typescript": "4.8.4"
   }
 }
