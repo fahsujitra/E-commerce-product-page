@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  basePath: '/e-commerce-product-page',
   images: {
     unoptimized: true,
   },
