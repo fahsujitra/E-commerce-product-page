@@ -1,10 +1,40 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import { Hide, Text, Heading, Container, Box, Divider, Flex, HStack, Avatar, VStack, Center, Image, Grid, GridItem, Stack, Button } from '@chakra-ui/react';
-import React from 'react';
+import {
+  Hide, Text, Heading, Container, Box, Divider, Flex, HStack, Avatar, VStack,
+  Image, Button, ButtonGroup, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter
+} from '@chakra-ui/react';
+import React, { useRef } from 'react';
 import { MenuIcon, CartIcon } from '../components/icons';
 
 const Home: NextPage = () => {
+  const productImageRef = useRef<HTMLImageElement | null>(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const imageSrc = [
+    `${process.env.basePath}/images/image-product-1.jpg`,
+    `${process.env.basePath}/images/image-product-2.jpg`,
+    `${process.env.basePath}/images/image-product-3.jpg`,
+    `${process.env.basePath}/images/image-product-4.jpg`
+  ];
+
+  const changeProductImage = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+
+    const alt = (e.target as HTMLImageElement).alt;
+    if (alt) {
+      productImageRef.current!.src = imageSrc[+alt.substring(alt.length - 1) - 1];
+    }
+  }
+
+  const showLightBox = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+
+    const name = productImageRef.current!.src.split('.')[0];
+    console.log('lightbox', +name.substring(name.length - 1) - 1);
+    onOpen();
+  }
+
   return (
     <div>
       <Head>
@@ -52,55 +82,129 @@ const Home: NextPage = () => {
         </Hide>
 
 
-        <Container maxW={'90%'} mt={12} centerContent>
+        <Container maxW={'80%'} mt={12} centerContent>
           <HStack spacing={20}>
-            <VStack maxW={'50%'} spacing={8} mb={8}>
-              <Image src={`${process.env.basePath}/images/image-product-1.jpg`} alt='image-product-1' w={'100%'} borderRadius='md' />
-              <HStack spacing={8}>
-                <Box>
-                  <Image src={`${process.env.basePath}/images/image-product-1-thumbnail.jpg`} alt='image-product-1' borderRadius='md' />
+            <VStack maxW={'50%'} spacing={6} mb={8}>
+
+              <Image ref={productImageRef} src={imageSrc[0]} alt='image-product' w={'100%'} borderRadius='md'
+                onClick={showLightBox}
+                sx={{ cursor: 'pointer' }} />
+
+              <HStack spacing={6} onMouseOver={changeProductImage} onClick={showLightBox}>
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  _hover={{ borderColor: 'guideorange.200' }}>
+                  <Image src={`${process.env.basePath}/images/image-product-1-thumbnail.jpg`} alt='image-product-1' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
                 </Box>
-                <Box>
-                  <Image src={`${process.env.basePath}/images/image-product-2-thumbnail.jpg`} alt='image-product-2' borderRadius='md' />
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
+                  <Image src={`${process.env.basePath}/images/image-product-2-thumbnail.jpg`} alt='image-product-2' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
                 </Box>
-                <Box>
-                  <Image src={`${process.env.basePath}/images/image-product-3-thumbnail.jpg`} alt='image-product-3' borderRadius='md' />
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
+                  <Image src={`${process.env.basePath}/images/image-product-3-thumbnail.jpg`} alt='image-product-3' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
                 </Box>
-                <Box>
-                  <Image src={`${process.env.basePath}/images/image-product-4-thumbnail.jpg`} alt='image-product-4' borderRadius='md' />
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
+                  <Image src={`${process.env.basePath}/images/image-product-4-thumbnail.jpg`} alt='image-product-4' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
                 </Box>
               </HStack>
             </VStack>
 
             <VStack maxW={'40%'} align={'self-start'}>
-              <Heading fontSize='14px' color='guideorange.200' pb={6}>SNEAKER COMPANY</Heading>
-              <Heading as='b' fontSize='40px' color='guideblue.400'>Fall Limited Edition</Heading>
-              <Heading as='b' fontSize='40px' color='guideblue.400' position="relative" top="-3">Sneakers</Heading>
-              <Text py={8}>
+              <Heading fontSize='16px' color='guideorange.200' pb={6}>SNEAKER COMPANY</Heading>
+              <Heading as='b' fontSize='44px' color='guideblue.400'>Fall Limited Edition</Heading>
+              <Heading as='b' fontSize='44px' color='guideblue.400' position="relative" top="-3">Sneakers</Heading>
+              <Text py={6}>
                 These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they&apos;ll withstand everything the weather can offer.
               </Text>
-              <HStack spacing={4}>
-                <Heading fontSize='22px' color='guideblue.400'>$125.00</Heading>
-                <Text as='b' fontSize='12px' color='guideorange.200' bg='guideorange.100' px='1'>50%</Text>
+              <HStack spacing={4} align='center'>
+                <Heading fontSize='28px' color='guideblue.400'>$125.00</Heading>
+                <Heading as='b' fontSize='16px' color='guideorange.200' bg='guideorange.100' px='2' py={0.5}>50%</Heading>
               </HStack>
-              <Heading as='s' fontSize='14px' color='guideblue.200'>$250.00</Heading>
-              <HStack py='8'>
+              <Heading as='s' fontSize='16px' color='guideblue.200'>$250.00</Heading>
+              <HStack py='8' spacing={4}>
                 <HStack>
-                  <Button size='lg'>
-                    <Text fontSize='16px'>-</Text>
-                  </Button>
-                  <Text>0</Text>
-                  <Button size='lg'>
-                    <Text fontSize='16px'>+</Text>
-                  </Button>
+                  <ButtonGroup size='lg' isAttached >
+                    <Button size='lg'>
+                      <Text fontSize='24px' color='guideorange.200' mt={-1}>-</Text>
+                    </Button>
+                    <Button size='lg'>
+                      <Heading fontSize='16px'>0</Heading>
+                    </Button>
+                    <Button size='lg'>
+                      <Text fontSize='24px' color='guideorange.200' mt={-1}>+</Text>
+                    </Button>
+                  </ButtonGroup>
                 </HStack>
-                <Button color='white' bg='guideorange.200' size='lg' px='20'>
-                  <Text fontSize='16px'><CartIcon boxSize={6} mr={4} />   Add to cart</Text>
+                <Button color='white' bg='guideorange.200' size='lg' px='20' >
+                  <Text fontSize='16px'><CartIcon boxSize={4} mr={3} />Add to cart</Text>
                 </Button>
               </HStack>
             </VStack>
           </HStack>
         </Container>
+
+        {/* closeOnOverlayClick={false} */}
+        <Modal isCentered isOpen={isOpen} onClose={onClose}>
+          {/* <ModalOverlay
+            bg='none'
+            backdropFilter='auto'
+            backdropInvert='80%'
+            backdropBlur='2px'
+          /> */}
+          <ModalOverlay
+            backdropFilter='auto'
+            backdropBrightness='0.5'
+          />
+          <ModalContent backgroundColor='transparent'>
+            {/* <ModalHeader>Modal Title</ModalHeader> */}
+            {/* <ModalCloseButton /> */}
+            {/* <ModalBody> */}
+
+
+
+            <VStack spacing={6}>
+
+              <Image src={imageSrc[0]} alt='image-product' w={'100%'} borderRadius='md'
+                onClick={showLightBox}
+                sx={{ cursor: 'pointer' }} />
+
+              <HStack spacing={6} onMouseOver={changeProductImage} onClick={showLightBox}>
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  _hover={{ borderColor: 'guideorange.200' }}>
+                  <Image src={`${process.env.basePath}/images/image-product-1-thumbnail.jpg`} alt='image-product-1' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
+                </Box>
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
+                  <Image src={`${process.env.basePath}/images/image-product-2-thumbnail.jpg`} alt='image-product-2' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
+                </Box>
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
+                  <Image src={`${process.env.basePath}/images/image-product-3-thumbnail.jpg`} alt='image-product-3' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
+                </Box>
+                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
+                  <Image src={`${process.env.basePath}/images/image-product-4-thumbnail.jpg`} alt='image-product-4' borderRadius='lg'
+                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
+                </Box>
+              </HStack>
+            </VStack>
+
+
+
+            {/* </ModalBody> */}
+            {/* <ModalFooter>
+              <Button onClick={onClose}>Close</Button>
+            </ModalFooter> */}
+          </ModalContent>
+        </Modal>
 
 
       </Container>
