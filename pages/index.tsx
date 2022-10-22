@@ -2,36 +2,22 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import {
   Hide, Text, Heading, Container, Box, Divider, Flex, HStack, Avatar, VStack,
-  Image, Button, ButtonGroup, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter
+  Button, ButtonGroup, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter
 } from '@chakra-ui/react';
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { MenuIcon, CartIcon } from '../components/icons';
+import ProductImage from '../components/productImage';
 
 const Home: NextPage = () => {
-  const productImageRef = useRef<HTMLImageElement | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const imageSrc = [
-    `${process.env.basePath}/images/image-product-1.jpg`,
-    `${process.env.basePath}/images/image-product-2.jpg`,
-    `${process.env.basePath}/images/image-product-3.jpg`,
-    `${process.env.basePath}/images/image-product-4.jpg`
-  ];
+  const [idxImage, setIdxImage] = useState(0);
 
-  const changeProductImage = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-
-    const alt = (e.target as HTMLImageElement).alt;
-    if (alt) {
-      productImageRef.current!.src = imageSrc[+alt.substring(alt.length - 1) - 1];
-    }
-  }
-
-  const showLightBox = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
-    e.stopPropagation();
-
-    const name = productImageRef.current!.src.split('.')[0];
-    console.log('lightbox', +name.substring(name.length - 1) - 1);
+  // const showLightBox = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
+  //   e.stopPropagation();
+  const showLightBox = (idx: number) => {
+    console.log('lightbox', idx);
+    setIdxImage(idx);
     onOpen();
   }
 
@@ -84,35 +70,11 @@ const Home: NextPage = () => {
 
         <Container maxW={'80%'} mt={12} centerContent>
           <HStack spacing={20}>
-            <VStack maxW={'50%'} spacing={6} mb={8}>
 
-              <Image ref={productImageRef} src={imageSrc[0]} alt='image-product' w={'100%'} borderRadius='md'
-                onClick={showLightBox}
-                sx={{ cursor: 'pointer' }} />
+            <Box maxW={'50%'} mb={8}>
+              <ProductImage showLightBox={showLightBox} idx={0} />
+            </Box>
 
-              <HStack spacing={6} onMouseOver={changeProductImage} onClick={showLightBox}>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  _hover={{ borderColor: 'guideorange.200' }}>
-                  <Image src={`${process.env.basePath}/images/image-product-1-thumbnail.jpg`} alt='image-product-1' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
-                  <Image src={`${process.env.basePath}/images/image-product-2-thumbnail.jpg`} alt='image-product-2' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
-                  <Image src={`${process.env.basePath}/images/image-product-3-thumbnail.jpg`} alt='image-product-3' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
-                  <Image src={`${process.env.basePath}/images/image-product-4-thumbnail.jpg`} alt='image-product-4' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-              </HStack>
-            </VStack>
 
             <VStack maxW={'40%'} align={'self-start'}>
               <Heading fontSize='16px' color='guideorange.200' pb={6}>SNEAKER COMPANY</Heading>
@@ -165,39 +127,7 @@ const Home: NextPage = () => {
             {/* <ModalCloseButton /> */}
             {/* <ModalBody> */}
 
-
-
-            <VStack spacing={6}>
-
-              <Image src={imageSrc[0]} alt='image-product' w={'100%'} borderRadius='md'
-                onClick={showLightBox}
-                sx={{ cursor: 'pointer' }} />
-
-              <HStack spacing={6} onMouseOver={changeProductImage} onClick={showLightBox}>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  _hover={{ borderColor: 'guideorange.200' }}>
-                  <Image src={`${process.env.basePath}/images/image-product-1-thumbnail.jpg`} alt='image-product-1' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
-                  <Image src={`${process.env.basePath}/images/image-product-2-thumbnail.jpg`} alt='image-product-2' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
-                  <Image src={`${process.env.basePath}/images/image-product-3-thumbnail.jpg`} alt='image-product-3' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
-                  sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
-                  <Image src={`${process.env.basePath}/images/image-product-4-thumbnail.jpg`} alt='image-product-4' borderRadius='lg'
-                    sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
-                </Box>
-              </HStack>
-            </VStack>
-
-
+            <ProductImage idx={idxImage} />
 
             {/* </ModalBody> */}
             {/* <ModalFooter>
