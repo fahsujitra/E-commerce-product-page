@@ -9,6 +9,7 @@ const basePath = '/e-commerce-product-page';
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  productionBrowserSourceMaps: true,
   env: {
     basePath: basePath,
   },
