@@ -16,8 +16,8 @@ const Home: NextPage = () => {
   // const showLightBox = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
   //   e.stopPropagation();
   const showLightBox = (idx: number) => {
-    console.log('lightbox', idx);
-    setIdxImage(idx);
+    console.log('lightbox', idx, idxImage);
+    // setIdxImage(idx);
     onOpen();
   }
 
@@ -72,7 +72,7 @@ const Home: NextPage = () => {
           <HStack spacing={20}>
 
             <Box maxW={'50%'} mb={8}>
-              <ProductImage showLightBox={showLightBox} idx={0} />
+              <ProductImage showLightBox={showLightBox} idx={0} setIdx={setIdxImage}/>
             </Box>
 
 
@@ -127,7 +127,7 @@ const Home: NextPage = () => {
             {/* <ModalCloseButton /> */}
             {/* <ModalBody> */}
 
-            <ProductImage idx={idxImage} />
+            <ProductImage idx={idxImage} setIdx={setIdxImage}/>
 
             {/* </ModalBody> */}
             {/* <ModalFooter>

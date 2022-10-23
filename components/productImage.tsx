@@ -11,9 +11,10 @@ const imageSrc = [
 type ProductImageProps = {
     showLightBox?: (idx: number) => void;
     idx: number;
+    setIdx: (value: number) => void;
 };
 
-const ProductImage = ({ showLightBox, idx }: ProductImageProps) => {
+const ProductImage = ({ showLightBox, idx, setIdx }: ProductImageProps) => {
     const productImageRef = useRef<HTMLImageElement | null>(null);
     const changeProductImage = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
@@ -24,10 +25,15 @@ const ProductImage = ({ showLightBox, idx }: ProductImageProps) => {
         }
     }
 
-    const onClickImage = () => {
+    const onClickImage = (e: React.SyntheticEvent) => {
+        e.stopPropagation();
         if (showLightBox) {
+            debugger;
             const name = productImageRef.current!.src.split('.')[0];
-            showLightBox(+name.substring(name.length - 1) - 1);
+            const id = +name.substring(name.length - 1) - 1;
+            console.log('onClickImage/showLightBox', id);
+            setIdx(id);
+            showLightBox(id);
         }
     }
 
