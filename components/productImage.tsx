@@ -22,15 +22,14 @@ const ProductImage = ({ showLightBox, idx }: ProductImageProps) => {
         const alt = (e.target as HTMLImageElement).alt;
         if (alt) {
             productImageRef.current!.src = imageSrc[+alt.substring(alt.length - 1) - 1];
+            productImageRef.current!.alt = `${+alt.substring(alt.length - 1) - 1}`;
         }
     }
 
     const onClickImage = (e: React.SyntheticEvent) => {
         e.stopPropagation();
         if (showLightBox) {
-            const name = productImageRef.current!.src.split('.')[0];
-            // const name = productImageRef.current!.currentSrc.split('.')[0];
-            const id = +name.substring(name.length - 1) - 1;
+            const id = +productImageRef.current!.alt;
             console.log('onClickImage/showLightBox', id);
             showLightBox(id);
         }
