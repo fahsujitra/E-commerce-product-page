@@ -10,11 +10,11 @@ import ProductImage from '../components/productImage';
 
 const Home: NextPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [imageIdx, setImageIdx] = useState(0);
 
-  // const showLightBox = (e: React.SyntheticEvent<HTMLDivElement, MouseEvent>) => {
-  //   e.stopPropagation();
-  const showLightBox = (idx: number) => {
+  const lightBox = (idx: number) => {
     console.log('lightbox', idx);
+    setImageIdx(idx);
     onOpen();
   }
 
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
           <HStack spacing={20}>
 
             <Box maxW={'50%'} mb={8}>
-              <ProductImage showLightBox={showLightBox} idx={0}/>
+              <ProductImage showLightBox={lightBox} idx={0}/>
             </Box>
 
 
@@ -124,7 +124,7 @@ const Home: NextPage = () => {
             {/* <ModalCloseButton /> */}
             {/* <ModalBody> */}
 
-            <ProductImage idx={0} />
+            <ProductImage idx={imageIdx} />
 
             {/* </ModalBody> */}
             {/* <ModalFooter>
