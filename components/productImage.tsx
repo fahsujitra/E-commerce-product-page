@@ -43,22 +43,22 @@ const ProductImage = ({ showLightBox, idx }: ProductImageProps) => {
                 sx={{ cursor: 'pointer' }} />
 
             <HStack spacing={6} onMouseOver={changeProductImage} onClick={onClickImage}>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                <Box borderRadius='xl' borderWidth={3} borderColor='white' backgroundColor='white'
                     _hover={{ borderColor: 'guideorange.200' }}>
                     <Image src={`${process.env.basePath}/images/image-product-1-thumbnail.jpg`} alt='image-product-1' borderRadius='lg'
                         sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
                 </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                <Box borderRadius='xl' borderWidth={3} borderColor='white' backgroundColor='white'
                     sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
                     <Image src={`${process.env.basePath}/images/image-product-2-thumbnail.jpg`} alt='image-product-2' borderRadius='lg'
                         sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
                 </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                <Box borderRadius='xl' borderWidth={3} borderColor='white' backgroundColor='white'
                     sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
                     <Image src={`${process.env.basePath}/images/image-product-3-thumbnail.jpg`} alt='image-product-3' borderRadius='lg'
                         sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />
                 </Box>
-                <Box borderRadius='xl' borderWidth={3} borderColor='white'
+                <Box borderRadius='xl' borderWidth={3} borderColor='white' backgroundColor='white'
                     sx={{ "&:hover": { borderColor: 'guideorange.200' } }}>
                     <Image src={`${process.env.basePath}/images/image-product-4-thumbnail.jpg`} alt='image-product-4' borderRadius='lg'
                         sx={{ "&:hover": { opacity: 0.5, cursor: 'pointer' } }} />

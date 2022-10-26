@@ -5,7 +5,7 @@ import {
   Button, ButtonGroup, useDisclosure, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
-import { MenuIcon, CartIcon } from '../components/icons';
+import { MenuIcon, CartIcon, CloseIcon, PreviousIcon, NextIcon } from '../components/icons';
 import ProductImage from '../components/productImage';
 
 const Home: NextPage = () => {
@@ -123,9 +123,11 @@ const Home: NextPage = () => {
             {/* <ModalHeader>Modal Title</ModalHeader> */}
             {/* <ModalCloseButton /> */}
             {/* <ModalBody> */}
-
+            <CloseIcon boxSize={5} mt={1} color='guideblue.300' />
+            
+            <PreviousIcon boxSize={5} mt={1} color='guideblue.300' />
             <ProductImage idx={imageIdx} />
-
+            <NextIcon boxSize={5} mt={1} color='guideblue.300' />
             {/* </ModalBody> */}
             {/* <ModalFooter>
               <Button onClick={onClose}>Close</Button>

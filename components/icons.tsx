@@ -2,7 +2,7 @@ import { Icon } from "@chakra-ui/react";
 
 const MenuIcon = (props: any) => (
     <Icon width="16" height="15" xmlns="http://www.w3.org/2000/svg" {...props}>
-        <path d="M16 12v3H0v-3h16Zm0-6v3H0V6h16Zm0-6v3H0V0h16Z" 
+        <path d="M16 12v3H0v-3h16Zm0-6v3H0V6h16Zm0-6v3H0V0h16Z"
             fill="currentColor"
         />
     </Icon>
@@ -16,4 +16,28 @@ const CartIcon = (props: any) => (
     </Icon>
 );
 
-export { MenuIcon, CartIcon }
+const CloseIcon = (props: any) => (
+    <Icon width="14" height="15" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="m11.596.782 2.122 2.122L9.12 7.499l4.597 4.597-2.122 2.122L7 9.62l-4.595 4.597-2.122-2.122L4.878 7.5.282 2.904 2.404.782l4.595 4.596L11.596.782Z"
+            fill="currentColor"
+        />
+    </Icon>
+);
+
+const PreviousIcon = (props: any) => (
+    <Icon width="12" height="18" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3"
+            fill="currentColor"
+        />
+    </Icon>
+);
+
+const NextIcon = (props: any) => (
+    <Icon width="13" height="18" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3"
+            fill="currentColor"
+        />
+    </Icon>
+);
+
+export { MenuIcon, CartIcon, CloseIcon, PreviousIcon, NextIcon }
